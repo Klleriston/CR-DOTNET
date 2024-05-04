@@ -22,8 +22,8 @@ app.UseCors(o => o
 
 app.UseAuthorization();
 
-// var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<CrDB>();
-// context.Database.Migrate();
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<CrDB>();
+context.Database.Migrate();
 
 app.MapControllers();
 
