@@ -3,6 +3,7 @@ using src.Data;
 using src.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://+:8080");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -13,17 +14,9 @@ builder.Services.AddScoped<ITicketRepository, TicketService>();
 
 var app = builder.Build();
 
-app.UseCors(o => o
-    .WithOrigins(new[] { "http://localhost:4200", }) ///PORTA DO FRONTEND ANGULAS
-    .AllowCredentials()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-);
-
 app.UseAuthorization();
 
-var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<CrDB>();
-context.Database.Migrate();
+
 
 app.MapControllers();
 
