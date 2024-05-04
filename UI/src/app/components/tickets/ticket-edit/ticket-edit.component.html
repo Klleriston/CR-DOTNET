@@ -1,0 +1,35 @@
+<div class="container my-5">
+  <h1 class="mb-3">Edit Department</h1>
+  <form #Form="ngForm" (ngSubmit)="updateTicket()">
+
+    <div class="mb-3">
+      <label for="id" class="form-label"><b>ID</b></label>
+      <input type="text" class="form-control" id="id" name="id" readonly [(ngModel)]="ticketDetail.id" disabled>
+    </div>
+
+    <div class="mb-3">
+      <label for="owner" class="form-label"><b>Owner</b></label>
+      <input type="text" class="form-control" id="owner" name="owner" [(ngModel)]="ticketDetail.user">
+    </div>
+
+    <div class="mb-3">
+      <label for="title" class="form-label"><b>Title</b></label>
+      <input type="text" class="form-control" id="title" name="title" [(ngModel)]="ticketDetail.title">
+    </div>
+
+    <div class="mb-3">
+      <label for="open" class="form-label"><b>Open</b></label>
+      <input type="text" class="form-control" id="open" name="open" [(ngModel)]="ticketDetail.open">
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label"><b>Description</b></label>
+      <input type="text" class="form-control" id="description" name="description"
+        [(ngModel)]="ticketDetail.description">
+    </div>
+
+    <button type="submit" class="btn btn-primary mr-5">Save</button>
+    <button type="button" class="btn btn-danger" (click)="deleteTicket(ticketDetail.id)">Delete</button>
+
+  </form>
+</div>

@@ -1,0 +1,16 @@
+<div class="container my-5">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 class="mb-3">Register</h1>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+    </div>
+    <button class="btn btn-primary " (click)="redirectToLogin()">Register</button>
+
+
+  </form>
+</div>

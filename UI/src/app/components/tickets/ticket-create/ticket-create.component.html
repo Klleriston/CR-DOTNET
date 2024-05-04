@@ -1,0 +1,20 @@
+<div class="container my-5">
+  <h1 class="mb-3">Create Ticket</h1>
+  <form (submit)="createTicket()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" [(ngModel)]="ticket.title" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label for="user" class="form-label">Owner</label>
+      <input type="number" class="form-control" id="user" [(ngModel)]="ticket.user" name="user"
+        placeholder="Enter a user's Id" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" [(ngModel)]="ticket.description" name="description"
+        required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
