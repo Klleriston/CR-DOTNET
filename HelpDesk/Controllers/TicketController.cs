@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.Data;
+using src.DTO;
 
 namespace src.Controller
 {
@@ -35,19 +36,34 @@ namespace src.Controller
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult PutTicket(int id, [FromBody]Ticket ticket)
+        public IActionResult PutTicket(int id, [FromBody] Ticket ticket)
         {
             if (id != ticket.Id) return BadRequest("Id mismatch.");
             _ticketService.UpdateTicket(ticket);
             return Ok("Ticket updated.");
         }
 
-        [HttpPost("create")]
-        public IActionResult CreateTicket([FromBody] Ticket ticket)
+        [HttpPost]
+        public IActionResult CreateTicket([FromBody] Ticket request)
         {
-            if (ticket == null) return BadRequest();
-            _ticketService.Create(ticket);
-            return Ok(ticket);
+            try
+            {
+                var ticket = new Ticket
+                {
+                    Title = request.Title,
+                    Description = request.Description,
+                    Open = request.Open,
+                    UserId = request.User.Id,
+                };
+
+                _ticketService.Create(ticket);
+
+                return Ok("Ticket created successfully!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"Error: {ex.Message}" });
+            }
         }
 
         [HttpDelete("{id:int}")]

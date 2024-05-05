@@ -49,7 +49,6 @@ namespace src.Data
         public void UpdateTicket(Ticket ticket)
         {
             ticket.Title = ticket.Title;
-            ticket.created = DateTime.Now;
             ticket.Description = ticket.Description;
             ticket.Open = ticket.Open;
 

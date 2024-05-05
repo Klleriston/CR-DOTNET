@@ -56,27 +56,24 @@ namespace api.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] UserRegisterDTO registrationDTO)
+        public IActionResult RegisterUser([FromBody] UserRegisterDTO request)
         {
             try
             {
-                if (_userRepository.GetUserByEmail(registrationDTO.Email) != null)
+                var user = new User
                 {
-                    return Conflict(new { message = "The user is already registered." });
-                }
-
-                var newUser = new User
-                {
-                    Email = registrationDTO.Email,
-                    Password = registrationDTO.Password,
+                    Name = request.Name,
+                    Email = request.Email,
+                    Password = request.Password
                 };
-                _userRepository.Create(newUser);
 
-                return Ok(new { message = "User registered successfully!" });
+                _userRepository.Create(user);
+
+                return Ok("User registered successfully!");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = $"ops {ex.Message}" });
+                return StatusCode(500, new { message = $"Error: {ex.Message}" });
             }
         }
 
