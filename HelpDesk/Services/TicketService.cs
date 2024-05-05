@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace src.Data
 {
-    public class TicketService : ITicketRepository
+    public class TicketService
     {
         private readonly CrDB _crDB;
 
@@ -18,21 +18,22 @@ namespace src.Data
             return _crDB.Tickets.AsNoTracking().Skip(nRegisters * nPages - 1).Take(nRegisters).ToList();
         }
 
-        public Ticket Create(Ticket ticket)
+        public void Create(Ticket ticket)
         {
             _crDB.Tickets.Add(ticket);
             _crDB.SaveChanges();
-            return ticket;
         }
 
         public Ticket GetTicketByTitle(string title)
         {
-            return _crDB.Tickets.FirstOrDefault(t => t.Title == title);
+            Ticket ticket = _crDB.Tickets.FirstOrDefault(t => t.Title == title);
+            return ticket; 
         }
 
         public Ticket GetTicketById(int id)
         {
-            return _crDB.Tickets.FirstOrDefault(t => t.Id == id);
+            Ticket ticket = _crDB.Tickets.FirstOrDefault(t => t.Id == id);
+            return ticket;
         }
 
         public void DeleteTicket(int id)
@@ -47,7 +48,12 @@ namespace src.Data
 
         public void UpdateTicket(Ticket ticket)
         {
-            _crDB.Entry(ticket).State = EntityState.Modified;
+            ticket.Title = ticket.Title;
+            ticket.created = DateTime.Now;
+            ticket.Description = ticket.Description;
+            ticket.Open = ticket.Open;
+
+            _crDB.Update(ticket);
             _crDB.SaveChanges();
         }
     }

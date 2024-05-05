@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TicketDTO } from 'src/app/models/Ticket';
+import { TicketBody, TicketDTO } from 'src/app/models/Ticket';
 import { TicketService } from 'src/app/services/tickets/ticket.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { TicketService } from 'src/app/services/tickets/ticket.service';
   templateUrl: './ticket-list.component.html',
 })
 export class TicketListComponent implements OnInit {
-  tickets: TicketDTO[] = [];
+  tickets: TicketBody[] = [];
 
   constructor(private ticketService: TicketService, private router: Router) { }
 

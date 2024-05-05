@@ -7,7 +7,7 @@
     </div>
     <div class="mb-3">
       <label for="user" class="form-label">Owner</label>
-      <input type="number" class="form-control" id="user" [(ngModel)]="ticket.user" name="user"
+      <input type="number" class="form-control" id="user" [(ngModel)]="ticket.userid" name="user"
         placeholder="Enter a user's Id" required>
     </div>
     <div class="mb-3">
@@ -15,6 +15,10 @@
       <textarea class="form-control" id="description" [(ngModel)]="ticket.description" name="description"
         required></textarea>
     </div>
+    <div class="mb-3">
+      <label for="open" class="form-label">Open</label>
+      <input type="checkbox" id="open" [(ngModel)]="ticket.open" name="open">
+    </div>    
     <button type="submit" class="btn btn-primary">Create</button>
   </form>
 </div>

@@ -5,7 +5,7 @@ using src.Data;
 namespace src.Controller
 {
     [ApiController]
-    [Route("api/[controller]")]	
+    [Route("api/[controller]")]
     public class TicketController : ControllerBase
     {
         private readonly TicketService _ticketService;
@@ -15,43 +15,46 @@ namespace src.Controller
         {
             _ticketService = ticketService;
             _crDB = crDB;
-        }   
+        }
+
 
         [HttpGet]
-        public ActionResult<IEnumerable<Ticket>> GetTickets()
+        public ActionResult GetTickets()
         {
             IEnumerable<Ticket> tickets = _ticketService.GetAllTickets();
-            if (!tickets.Any()) return NotFound("No tickets found.");
+            if (!tickets.Any()) return NoContent();
             return Ok(tickets);
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Ticket> GetTicket(int id)
+        public ActionResult GetTicket(int id)
         {
-            var existTicket = _crDB.Tickets.FindAsync(id);
-            return Ok(existTicket);
+            Ticket ticket = _ticketService.GetTicketById(id);
+            if (ticket == null) return NotFound();
+            return Ok(ticket);
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult PutTicket(int id, Ticket ticket)
+        public IActionResult PutTicket(int id, [FromBody]Ticket ticket)
         {
-            if (id!= ticket.Id) return BadRequest("Id mismatch.");
+            if (id != ticket.Id) return BadRequest("Id mismatch.");
             _ticketService.UpdateTicket(ticket);
-            return Ok("Ticket updated."); 
+            return Ok("Ticket updated.");
         }
 
         [HttpPost("create")]
-        public IActionResult CreateTicket(Ticket ticket)
+        public IActionResult CreateTicket([FromBody] Ticket ticket)
         {
+            if (ticket == null) return BadRequest();
             _ticketService.Create(ticket);
-            return Ok("Ticket created.");
+            return Ok(ticket);
         }
 
         [HttpDelete("{id:int}")]
         public IActionResult DeleteTicket(int id)
         {
             _ticketService.DeleteTicket(id);
-            return Ok("Ticket deleted.");
+            return NoContent();
         }
 
     }

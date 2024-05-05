@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { TicketBody, TicketDTO } from 'src/app/models/Ticket';
 import { environment } from 'src/environments/environment';
@@ -8,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TicketService {
-
-  url: string = environment.baseAPIurl + '/api/tickets';
+  
+  url: string = environment.baseAPIurl + '/api/ticket';
   constructor(private http: HttpClient) { }
 
   getAllTickets(): Observable<TicketDTO[]> {
@@ -21,7 +22,7 @@ export class TicketService {
   }
 
   addTicket(ticket: TicketBody): Observable<TicketBody> {
-    return this.http.post<TicketBody>(this.url, ticket);
+    return this.http.post<TicketBody>(`${this.url}/create`, ticket);
   }
 
   updateTicket(id: number, ticket: TicketBody): Observable<TicketBody> {

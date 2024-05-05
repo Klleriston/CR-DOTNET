@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TicketBody } from 'src/app/models/Ticket';
 import { TicketService } from 'src/app/services/tickets/ticket.service';
@@ -7,17 +7,17 @@ import { TicketService } from 'src/app/services/tickets/ticket.service';
   selector: 'app-ticket-create',
   templateUrl: './ticket-create.component.html',
 })
-export class TicketCreateComponent {
+export class TicketCreateComponent implements OnInit{
+
   ticket: TicketBody = {
     id: 0,
-    user: 0,
+    userid: null,
     title: '',
     open: false,
     description: '',
-    created: new Date(),
-  };
-
+};
   constructor(private ticketService: TicketService, private router: Router) { }
+  ngOnInit(): void {}
 
   createTicket() {
     this.ticketService.addTicket(this.ticket).subscribe({

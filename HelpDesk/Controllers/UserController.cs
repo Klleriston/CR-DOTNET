@@ -55,14 +55,6 @@ namespace api.Controllers
             }
         }
 
-
-        [HttpGet("users")]
-        public IActionResult GetRegisteredUsers()
-        {
-            var users = _userRepository.GetAllUsers();
-            return Ok(users);
-        }
-
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserRegisterDTO registrationDTO)
         {
@@ -87,13 +79,6 @@ namespace api.Controllers
                 return StatusCode(500, new { message = $"ops {ex.Message}" });
             }
         }
-        [HttpPut("user/{id:int}")]
-        public IActionResult UpdateUser(int id, [FromBody] User user)
-        {
-             if (id!= user.Id) return BadRequest("Id mismatch.");
-            _userRepository.UpdateUser(user);
-            return Ok("user updated."); 
-        }   
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginDTO loginDTO)
@@ -132,27 +117,6 @@ namespace api.Controllers
         {
             Response.Cookies.Delete("jwt");
             return Ok(new { message = "Logged out successfully!" });
-        }
-
-        [HttpDelete("user/{id:int}")]
-        public IActionResult DeleteUser(int id)
-        {
-            try
-            {
-                var user = _userRepository.GetUserById(id);
-
-                if (user == null)
-                {
-                    return NotFound(new { message = "User not found." });
-                }
-                _userRepository.DeleteUser(id);
-
-                return Ok(new { message = "User deleted successfully." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = $"ops {ex.Message}" });
-            }
         }
 
     }

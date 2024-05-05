@@ -10,11 +10,10 @@ import { TicketService } from 'src/app/services/tickets/ticket.service';
 export class TicketEditComponent implements OnInit {
   ticketDetail: TicketBody = {
     id: 0,
-    user: 0,
+    userid: 0,
     title: '',
     open: false,
     description: '',
-    created: new Date(),
   };
 
   constructor(
