@@ -10,15 +10,7 @@
 - FrontEnd -> Angular
 
 ## Link do deploy:
-- https://helpdesk-umvwhfsykq-uc.a.run.app/home -> Get
-# endpoint:
-# tickets:
-- https://helpdesk-umvwhfsykq-uc.a.run.app/api/ticket
-- https://helpdesk-umvwhfsykq-uc.a.run.app/api/:id 
-# user:
-- https://helpdesk-umvwhfsykq-uc.a.run.app/register
-- https://helpdesk-umvwhfsykq-uc.a.run.app/login
-- https://helpdesk-umvwhfsykq-uc.a.run.app/user (apenas autenticado)
+- OFF :(
 
 
 ## Contato
